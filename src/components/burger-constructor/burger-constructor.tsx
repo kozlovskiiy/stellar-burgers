@@ -1,30 +1,26 @@
 import { FC, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectConstructorItems,
-  selectOrderRequest,
-  selectOrderModalData,
-  setBun,
-  addIngredient,
-  removeIngredient
-} from '../../slices/burgerSlice'; // Селекторы и экшены
-import { BurgerConstructorUI } from '@ui';
 import { TConstructorIngredient } from '@utils-types';
-
+import { BurgerConstructorUI } from '@ui';
+import { useSelector } from '../../services/store';
 export const BurgerConstructor: FC = () => {
-  const constructorItems = useSelector(selectConstructorItems);
-  const orderRequest = useSelector(selectOrderRequest);
-  const orderModalData = useSelector(selectOrderModalData);
-  const dispatch = useDispatch();
+  /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
+  const constructorItems = useSelector((state) => state.constructor);
+
+  // const constructorItems = {
+  //   bun: {
+  //     price: 0
+  //   },
+  //   ingredients: []
+  // };
+
+  const orderRequest = false;
+
+  const orderModalData = null;
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
-    // Логика для обработки заказа
   };
-
-  const closeOrderModal = () => {
-    // Логика для закрытия модального окна
-  };
+  const closeOrderModal = () => {};
 
   const price = useMemo(
     () =>
@@ -35,6 +31,7 @@ export const BurgerConstructor: FC = () => {
       ),
     [constructorItems]
   );
+
   return (
     <BurgerConstructorUI
       price={price}

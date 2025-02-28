@@ -6,7 +6,7 @@ import {
   fetchIngredients,
   selectIngredients,
   selectIsLoading
-} from '../../slices/burgerSlice';
+} from '../../slices/ingredientsSlice';
 
 import { TTabMode, TIngredient } from '@utils-types';
 import { BurgerIngredientsUI } from '../ui/burger-ingredients';
