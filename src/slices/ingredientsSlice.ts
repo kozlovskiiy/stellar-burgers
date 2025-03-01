@@ -4,12 +4,16 @@ import { getIngredientsApi } from '../utils/burger-api';
 
 interface IngredientsState {
   ingredients: TIngredient[];
+  bun: Partial<TIngredient>;
   isLoading: boolean;
 }
 
 const initialState: IngredientsState = {
   ingredients: [],
-  isLoading: false
+  isLoading: false,
+  bun: {
+    price: 0
+  }
 };
 
 // Асинхронный экшен для загрузки ингредиентов
