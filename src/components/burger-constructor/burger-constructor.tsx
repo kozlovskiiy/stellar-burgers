@@ -17,7 +17,6 @@ export const BurgerConstructor: FC = () => {
   const orderRequest = false;
 
   const orderModalData = null;
-
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
   };

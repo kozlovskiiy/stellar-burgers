@@ -91,10 +91,9 @@ export default constructorSlice.reducer;
 
 // Селекторы
 
-export const selectBun = (state: { constructor: ConstructorState }) =>
-  state.constructor.constructorItems.bun;
-export const selectIngredients = (state: { constructor: ConstructorState }) =>
-  state.constructor.constructorItems.ingredients;
-export const selectConstructorItems = (state: {
-  constructor: ConstructorState;
-}) => state.constructor.constructorItems;
+export const selectBun = (state: { builder: ConstructorState }) =>
+  state.builder.constructorItems.bun;
+export const selectIngredients = (state: { builder: ConstructorState }) =>
+  state.builder.constructorItems.ingredients;
+export const selectConstructorItems = (state: { builder: ConstructorState }) =>
+  state.builder.constructorItems;
