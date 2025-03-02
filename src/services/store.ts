@@ -7,12 +7,14 @@ import {
 
 import ingredientsReducer from '../slices/ingredientsSlice';
 import constructorReducer from '../slices/constructorSlice';
-import orderSliceReducer from '../slices/ordersSlice';
+import orderReducer from '../slices/ordersSlice';
+import modalReducer from '../slices/modalSlice';
 
 export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
   builder: constructorReducer,
-  orders: orderSliceReducer
+  orders: orderReducer,
+  modal: modalReducer
 });
 
 const store = configureStore({
