@@ -6,18 +6,23 @@ import {
 } from '@utils-types';
 import { v4 as uuidv4 } from 'uuid';
 
+// interface ConstructorState {
+//   constructorItems: {
+//     bun: Partial<TIngredient> & { price: number };
+//     ingredients: TConstructorIngredient[];
+//   };
+// }
+
 interface ConstructorState {
   constructorItems: {
-    bun: Partial<TIngredient> & { price: number };
+    bun: (Partial<TIngredient> & { price: number }) | null;
     ingredients: TConstructorIngredient[];
   };
 }
 
 const initialState: ConstructorState = {
   constructorItems: {
-    bun: {
-      price: 0
-    },
+    bun: null,
     ingredients: []
   }
 };
@@ -71,9 +76,7 @@ const constructorSlice = createSlice({
       }
     },
     resetConstructor(state) {
-      state.constructorItems.bun = {
-        price: 0
-      };
+      state.constructorItems.bun = null;
       state.constructorItems.ingredients = [];
     }
   }
