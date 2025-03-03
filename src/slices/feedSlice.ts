@@ -22,7 +22,11 @@ const initialState: TFeedState = {
 const feedSlice = createSlice({
   name: 'feed',
   initialState,
-  reducers: {},
+  reducers: {
+    resetOrders: (state) => {
+      state.orders = null;
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchOrders.fulfilled, (state, { payload }) => {
       state.orders = payload;
@@ -30,6 +34,7 @@ const feedSlice = createSlice({
   }
 });
 
+export const { resetOrders } = feedSlice.actions;
 export const selectOrders = (state: RootState) => state.feed.orders; // Селектор
 
 export default feedSlice.reducer;
