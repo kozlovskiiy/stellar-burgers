@@ -15,10 +15,10 @@ const initialState: OrderState = {
 };
 
 // Создаем асинхронный запрос для получения заказов
-export const fetchOrders = createAsyncThunk('orders/fetchOrders', async () => {
-  console.log('Запрос к API для получения заказов');
-  return await getOrdersApi(); // Выполняем API запрос
-});
+export const fetchOrders = createAsyncThunk(
+  'orders/fetchOrders',
+  async () => await getOrdersApi() // Выполняем API запрос
+);
 
 const orderSlice = createSlice({
   name: 'orders',
@@ -53,7 +53,6 @@ const orderSlice = createSlice({
         state.orderRequest = false;
       })
       .addCase(fetchOrders.fulfilled, (state, action) => {
-        console.log('Данные заказов:', action.payload);
         state.orders = action.payload; // Заполняем список заказов
         state.orderRequest = false;
       });
@@ -69,3 +68,4 @@ export const { closeOrderRequest } = orderSlice.actions;
 export const { selectOrderRequest, selectOrderModalData, selectOrders } =
   orderSlice.selectors;
 export default orderSlice.reducer;
+

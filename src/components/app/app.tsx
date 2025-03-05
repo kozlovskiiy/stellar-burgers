@@ -79,12 +79,7 @@ const App = () => {
         <Route
           path='/feed/:number'
           element={
-            <Modal
-              title={'Заказ'}
-              onClose={() => {
-                // dispatch(closeModal());
-              }}
-            >
+            <Modal title={'Заказ'} onClose={() => {}}>
               <OrderInfo />
             </Modal>
           }
@@ -95,6 +90,16 @@ const App = () => {
             <Modal title={'Описание ингридиента'} onClose={() => {}}>
               <IngredientDetails />
             </Modal>
+          }
+        />
+        <Route
+          path='/profile/orders/:number'
+          element={
+            <ProtectedRoute>
+              <Modal title={'Заказ'} onClose={() => {}}>
+                <OrderInfo />
+              </Modal>
+            </ProtectedRoute>
           }
         />
       </Routes>

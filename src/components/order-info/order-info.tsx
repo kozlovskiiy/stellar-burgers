@@ -2,16 +2,16 @@ import { FC, useMemo } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
-import { useSelector } from '../../services/store';
-import { selectOrders } from '../../slices/feedSlice';
+import { useSelector, useDispatch } from '../../services/store';
+import { selectOrders } from '../../slices/ordersSlice';
 import { selectIngredients } from '../../slices/ingredientsSlice';
 import { useParams } from 'react-router-dom';
-
 export const OrderInfo: FC = () => {
-  const { orders = [] } = useSelector(selectOrders) || {};
+  const orders = useSelector(selectOrders);
   const ingredients = useSelector(selectIngredients);
   const { number } = useParams<{ number: string }>();
-
+  console.log('Number from URL:', number); // Логируем параметр
+  console.log(orders);
   const orderData = orders.find(
     (order) => order.number === parseInt(number!)
   ) || {
