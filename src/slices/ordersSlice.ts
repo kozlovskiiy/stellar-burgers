@@ -68,4 +68,3 @@ export const { closeOrderRequest } = orderSlice.actions;
 export const { selectOrderRequest, selectOrderModalData, selectOrders } =
   orderSlice.selectors;
 export default orderSlice.reducer;
-
