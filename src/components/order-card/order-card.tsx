@@ -44,6 +44,7 @@ export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
         : 0;
 
     const date = new Date(order.createdAt);
+
     return {
       ...order,
       ingredientsInfo,
@@ -53,7 +54,6 @@ export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
       date
     };
   }, [order, ingredients]);
-
   if (!orderInfo) return null;
 
   return (

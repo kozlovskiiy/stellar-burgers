@@ -9,7 +9,6 @@ import { fetchOrders } from '../../slices/feedSlice';
 export const Feed: FC = () => {
   const orders = useSelector(selectOrders);
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(fetchOrders());
   }, [dispatch]);
