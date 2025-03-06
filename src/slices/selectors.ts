@@ -18,10 +18,11 @@ export const selectOrderByNumber = createSelector(
   [
     (state) => state.feed.orders?.orders || [],
     (state) => state.orders.orders,
+    (state) => state.orders.selectedOrder,
     (_, number: number) => number
   ],
-  (feedOrders, profileOrders, number) =>
+  (feedOrders, profileOrders, selectedOrder, number) =>
     feedOrders.find((order) => order.number === number) ||
     profileOrders.find((order) => order.number === number) ||
-    null
+    selectedOrder
 );

@@ -190,11 +190,11 @@ export const OrderInfo: FC = () => {
     }
   }, [dispatch, number, order]);
 
-  if (!order || !ingredients.length) {
-    return <Preloader />;
-  }
-
   const orderInfo = useMemo(() => {
+    if (!order || !ingredients.length) {
+      return null;
+    }
+
     const date = new Date(order.createdAt);
 
     type TIngredientsWithCount = {
@@ -232,6 +232,11 @@ export const OrderInfo: FC = () => {
       total
     };
   }, [order, ingredients]);
+
+  // Если orderInfo не вычислен или данных нет, показываем прелоадер
+  if (!orderInfo) {
+    return <Preloader />;
+  }
 
   return <OrderInfoUI orderInfo={orderInfo} />;
 };

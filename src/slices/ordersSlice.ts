@@ -76,13 +76,15 @@ import { TOrder } from '@utils-types';
 interface OrderState {
   orderRequest: boolean;
   orderModalData: TOrder | null;
-  orders: TOrder[]; // Добавим список заказов
+  orders: TOrder[]; // Добавим список заказов,
+  selectedOrder: TOrder | null;
 }
 
 const initialState: OrderState = {
   orderRequest: false,
   orderModalData: null,
-  orders: [] // Инициализируем пустым массивом
+  orders: [], // Инициализируем пустым массивом,
+  selectedOrder: null
 };
 
 // Создаем асинхронный запрос для получения заказов
@@ -142,7 +144,7 @@ const orderSlice = createSlice({
         state.orderRequest = false;
       })
       .addCase(fetchOrderByNumber.fulfilled, (state, action) => {
-        console.log('fetchOrderByNumber response:', action.payload); // Логируем данные
+        state.selectedOrder = action.payload.orders[0];
         state.orderRequest = false;
       });
   }
