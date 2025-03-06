@@ -15,12 +15,19 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route/protected-route';
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
 import { useDispatch } from '../../services/store';
+import { useEffect } from 'react';
+import { checkAuth, getUserThunk, init } from '../../slices/userSlice';
 
 const App = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const backgroundLocation = location.state?.background;
+
+  useEffect(() => {
+    dispatch(checkAuth());
+    dispatch(getUserThunk());
+  }, []);
 
   return (
     <div className={styles.app}>

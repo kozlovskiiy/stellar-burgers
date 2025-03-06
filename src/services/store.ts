@@ -14,13 +14,15 @@ import constructorReducer from '../slices/constructorSlice';
 import orderReducer from '../slices/ordersSlice';
 // import modalReducer from '../slices/modalSlice';
 import feedReducer from '../slices/feedSlice';
+import userReducer from '../slices/userSlice';
 
 export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
   builder: constructorReducer,
   orders: orderReducer,
   // modal: modalReducer,
-  feed: feedReducer
+  feed: feedReducer,
+  user: userReducer
 });
 
 const store = configureStore({

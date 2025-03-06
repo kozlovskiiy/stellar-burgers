@@ -44,13 +44,34 @@ export const fetchUpdateUser = createAsyncThunk(
 
 export const fetchLoginUser = createAsyncThunk(
   'user/login',
-  async (data: TLoginData) => loginUserApi(data)
+  async (data: TLoginData) => {
+    const response = await loginUserApi(data);
+
+    if (response.success) {
+      console.log('Access token:', response.accessToken); // Проверка токена
+      localStorage.setItem('accessToken', response.accessToken);
+    }
+
+    return response;
+  }
 );
 
 export const fetchRegisterUser = createAsyncThunk(
   'user/register',
   async (data: TRegisterData) => registerUserApi(data)
 );
+
+export const checkAuth = createAsyncThunk('user/checkAuth', async () => {
+  const token = localStorage.getItem('accessToken');
+  console.log('Access token from localStorage:', token); // Проверка извлечения токена
+
+  if (token) {
+    const response = await getUserApi();
+    return response;
+  }
+
+  return null;
+});
 
 // Редьюсер
 export const userSlice = createSlice({
@@ -69,6 +90,20 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // В редьюсере при инициализации
+      .addCase(init, (state) => {
+        state.isInit = true;
+
+        // Попытаться получить пользователя из localStorage
+        const user = localStorage.getItem('user');
+        if (user) {
+          state.user = JSON.parse(user);
+          state.userAuthorized = true;
+        } else {
+          state.user = { name: '', email: '' };
+          state.userAuthorized = false;
+        }
+      })
       // Получение данных пользователя
       .addCase(getUserThunk.pending, (state) => {
         state.loading = true;
@@ -96,6 +131,7 @@ export const userSlice = createSlice({
         if (action.payload.success) {
           state.user = { name: '', email: '' };
           state.userAuthorized = false;
+          localStorage.removeItem('user');
         }
       })
       // Обновление данных пользователя
@@ -123,6 +159,8 @@ export const userSlice = createSlice({
       .addCase(fetchLoginUser.fulfilled, (state, action) => {
         state.loading = false;
         state.userAuthorized = true;
+        state.user = action.payload.user;
+        localStorage.setItem('user', JSON.stringify(action.payload.user));
       })
       // Регистрация пользователя
       .addCase(fetchRegisterUser.pending, (state) => {
@@ -135,6 +173,12 @@ export const userSlice = createSlice({
       .addCase(fetchRegisterUser.fulfilled, (state, action) => {
         state.loading = false;
         state.userAuthorized = true;
+      })
+      .addCase(checkAuth.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.userAuthorized = true;
+          state.user = action.payload.user;
+        }
       });
   }
 });
