@@ -1,11 +1,10 @@
-import { createSelector } from '@reduxjs/toolkit';
-import { RootState } from '../services/store';
+import { createSelector } from '../services/store';
 
 export const selectOrderByNumber = createSelector(
   [
-    (state: RootState) => state.feed.orders?.orders || [],
-    (state: RootState) => state.orders.orders,
-    (_state: RootState, number: number) => number
+    (state) => state.feed.orders?.orders || [],
+    (state) => state.orders.orders,
+    (_, number: number) => number
   ],
   (feedOrders, profileOrders, number) =>
     feedOrders.find((order) => order.number === number) ||

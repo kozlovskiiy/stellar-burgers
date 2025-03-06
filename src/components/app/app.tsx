@@ -15,7 +15,7 @@ import { Routes, Route } from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route/protected-route';
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
 import { useDispatch } from '../../services/store';
-import { closeModal } from '../../slices/modalSlice';
+// import { closeModal } from '../../slices/modalSlice';
 
 const App = () => {
   const dispatch = useDispatch();
