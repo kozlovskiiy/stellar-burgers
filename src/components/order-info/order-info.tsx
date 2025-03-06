@@ -165,16 +165,18 @@
 //   return <OrderInfoUI orderInfo={orderInfo} />;
 // };
 
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
-import { useSelector } from '../../services/store';
+import { useSelector, useDispatch } from '../../services/store';
 import { selectOrderByNumber } from '../../slices/selectors';
 import { selectIngredients } from '../../slices/ingredientsSlice';
 import { useParams } from 'react-router-dom';
+import { fetchOrderByNumber } from '../../slices/ordersSlice';
 
 export const OrderInfo: FC = () => {
+  const dispatch = useDispatch();
   const ingredients = useSelector(selectIngredients);
   const { number } = useParams<{ number: string }>();
 
@@ -182,12 +184,17 @@ export const OrderInfo: FC = () => {
     selectOrderByNumber(state, parseInt(number!))
   );
 
-  if (!order) {
+  useEffect(() => {
+    if (!order) {
+      dispatch(fetchOrderByNumber(parseInt(number!)));
+    }
+  }, [dispatch, number, order]);
+
+  if (!order || !ingredients.length) {
     return <Preloader />;
   }
-  const orderInfo = useMemo(() => {
-    if (!order || !ingredients.length) return null;
 
+  const orderInfo = useMemo(() => {
     const date = new Date(order.createdAt);
 
     type TIngredientsWithCount = {
@@ -225,10 +232,6 @@ export const OrderInfo: FC = () => {
       total
     };
   }, [order, ingredients]);
-
-  if (!orderInfo) {
-    return <Preloader />;
-  }
 
   return <OrderInfoUI orderInfo={orderInfo} />;
 };
