@@ -1,42 +1,36 @@
-// import { Navigate, useLocation } from 'react-router-dom';
-// import {
-//   selectIsAuthenticated,
-//   selectIsInit
-// } from '../../slices/stellarBurgerSlice';
-// import { Preloader } from '../ui/preloader';
-// import { useAppSelector } from '../../services/store';
+import { Navigate, useLocation } from 'react-router';
 
-// type ProtectedRouteProps = {
-//   children: React.ReactElement;
-//   unAuthOnly?: boolean;
-// };
-
-// export const ProtectedRoute = ({
-//   children,
-//   unAuthOnly
-// }: ProtectedRouteProps) => {
-//   const isAuthenticated = useAppSelector(selectIsAuthenticated);
-//   const isInit = useAppSelector(selectIsInit);
-//   const location = useLocation();
-
-//   if (!isInit) {
-//     return <Preloader />;
-//   }
-
-//   if (!unAuthOnly && !isAuthenticated) {
-//     return <Navigate replace to='/login' state={{ from: location }} />;
-//   }
-
-//   if (unAuthOnly && isAuthenticated) {
-//     const from = location.state?.from || { pathname: '/' };
-//     return <Navigate replace to={from} />;
-//   }
-
-//   return children;
-// };
+import { useSelector } from '../../services/store';
+import {
+  isAuthCheckedSelector,
+  loginUserRequestSelector
+} from '../../slices/userSlice';
+import { Preloader } from '../ui/preloader';
 
 type ProtectedRouteProps = {
+  onlyUnAuth?: boolean;
   children: React.ReactElement;
 };
 
-export const ProtectedRoute = ({ children }: ProtectedRouteProps) => children;
+export const ProtectedRoute = ({
+  onlyUnAuth,
+  children
+}: ProtectedRouteProps) => {
+  const isAuthChecked = useSelector(isAuthCheckedSelector);
+  const loginUserRequest = useSelector(loginUserRequestSelector);
+  const location = useLocation();
+
+  if (!isAuthChecked && loginUserRequest) {
+    return <Preloader />;
+  }
+
+  if (!onlyUnAuth && !isAuthChecked) {
+    return <Navigate replace to='/login' state={{ from: location }} />; // в
+  }
+
+  if (onlyUnAuth && isAuthChecked) {
+    const from = location.state?.from || { pathname: '/' };
+    return <Navigate replace to={from} state={location} />;
+  }
+  return children;
+};

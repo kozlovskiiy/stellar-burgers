@@ -1,37 +1,48 @@
-import { FC, SyntheticEvent, useState } from 'react';
+import { FC, SyntheticEvent, useEffect } from 'react';
+
+import { useForm } from '../../hooks/useForm';
 import { RegisterUI } from '@ui-pages';
-import { RootState, useDispatch, useSelector } from '../../services/store';
+import { useSelector, useDispatch } from '../../services/store';
 import {
-  fetchRegisterUser,
-  removeErrorText,
-  setErrorText
+  clearErrors,
+  errorSelector,
+  registerUserThunk
 } from '../../slices/userSlice';
 
 export const Register: FC = () => {
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const error = useSelector(errorSelector);
 
-  const handleSubmit = async (e: SyntheticEvent) => {
+  const { values, handleChange } = useForm({
+    userName: '',
+    email: '',
+    password: ''
+  });
+
+  const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    dispatch(removeErrorText());
-    if (!userName || !email || !password) {
-      dispatch(setErrorText('Please fill in all fields'));
-      return;
-    }
-    await dispatch(fetchRegisterUser({ email, password, name: userName }));
+    dispatch(
+      registerUserThunk({
+        name: values.userName,
+        email: values.email,
+        password: values.password
+      })
+    );
   };
+
+  useEffect(() => {
+    dispatch(clearErrors());
+  }, [dispatch]);
 
   return (
     <RegisterUI
-      errorText=''
-      email={email}
-      userName={userName}
-      password={password}
-      setEmail={setEmail}
-      setPassword={setPassword}
-      setUserName={setUserName}
+      errorText={error!}
+      email={values.email}
+      userName={values.userName}
+      password={values.password}
+      setEmail={(e) => handleChange('email', e)}
+      setPassword={(e) => handleChange('password', e)}
+      setUserName={(e) => handleChange('userName', e)}
       handleSubmit={handleSubmit}
     />
   );
