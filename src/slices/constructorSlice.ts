@@ -6,13 +6,6 @@ import {
 } from '@utils-types';
 import { v4 as uuidv4 } from 'uuid';
 
-// interface ConstructorState {
-//   constructorItems: {
-//     bun: Partial<TIngredient> & { price: number };
-//     ingredients: TConstructorIngredient[];
-//   };
-// }
-
 interface ConstructorState {
   constructorItems: {
     bun: (Partial<TIngredient> & { price: number }) | null;
@@ -26,7 +19,6 @@ const initialState: ConstructorState = {
     ingredients: []
   }
 };
-
 const constructorSlice = createSlice({
   name: 'constructor',
   initialState,
@@ -40,14 +32,21 @@ const constructorSlice = createSlice({
         ...action.payload
       };
     },
-    addIngredient(state, action: PayloadAction<TIngredient>) {
-      if (action.payload.type === 'bun') {
-        state.constructorItems.bun = action.payload;
-      } else {
-        state.constructorItems.ingredients.push({
-          ...action.payload,
-          id: uuidv4()
-        });
+    addIngredient: {
+      reducer(state, action: PayloadAction<TConstructorIngredient>) {
+        if (action.payload.type === 'bun') {
+          state.constructorItems.bun = action.payload;
+        } else {
+          state.constructorItems.ingredients.push(action.payload);
+        }
+      },
+      prepare(ingredient: TIngredient) {
+        return {
+          payload: {
+            ...ingredient,
+            id: uuidv4()
+          } as TConstructorIngredient
+        };
       }
     },
     removeIngredient(state, action: PayloadAction<string>) {
@@ -60,19 +59,18 @@ const constructorSlice = createSlice({
       state,
       action: PayloadAction<{ index: number; upwards: boolean }>
     ) {
-      const ingredientLink =
-        state.constructorItems.ingredients[action.payload.index];
+      const { index, upwards } = action.payload;
+      const ingredients = state.constructorItems.ingredients;
 
-      if (action.payload.upwards) {
-        state.constructorItems.ingredients[action.payload.index] =
-          state.constructorItems.ingredients[action.payload.index - 1];
-        state.constructorItems.ingredients[action.payload.index - 1] =
-          ingredientLink;
-      } else {
-        state.constructorItems.ingredients[action.payload.index] =
-          state.constructorItems.ingredients[action.payload.index + 1];
-        state.constructorItems.ingredients[action.payload.index + 1] =
-          ingredientLink;
+      if (
+        (upwards && index > 0) ||
+        (!upwards && index < ingredients.length - 1)
+      ) {
+        const swapIndex = upwards ? index - 1 : index + 1;
+        [ingredients[index], ingredients[swapIndex]] = [
+          ingredients[swapIndex],
+          ingredients[index]
+        ];
       }
     },
     resetConstructor(state) {
