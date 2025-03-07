@@ -5,10 +5,7 @@ import { RootState } from '../services/store'; // Путь уточни под �
 
 export const fetchOrders = createAsyncThunk<TOrdersData>(
   'feed/fetchOrders',
-  async () => {
-    const data = await getFeedsApi();
-    return data;
-  }
+  getFeedsApi
 );
 
 type TFeedState = {
