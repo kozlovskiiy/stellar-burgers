@@ -12,13 +12,21 @@ import {
   selectOrderModalData,
   selectOrderRequest
 } from '../../slices/ordersSlice';
+import { useNavigate } from 'react-router-dom';
+import { isAuthCheckedSelector } from '../../slices/userSlice';
 export const BurgerConstructor: FC = () => {
   const constructorItems = useSelector(selectConstructorItems);
   const orderRequest = useSelector(selectOrderRequest);
   const orderModalData = useSelector(selectOrderModalData);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector(isAuthCheckedSelector);
 
   const onOrderClick = () => {
+    if (!isAuthenticated) {
+      return navigate('/login');
+    }
+
     if (!constructorItems.bun || !constructorItems.bun._id) return;
     if (constructorItems.ingredients.length === 0) return;
 
