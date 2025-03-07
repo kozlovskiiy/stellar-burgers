@@ -21,13 +21,16 @@ import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
 import { ProtectedRoute } from '../protected-route/protected-route';
 import { fetchIngredients } from '../../slices/ingredientsSlice';
 import { getUserThunk } from '../../slices/userSlice';
-
+import { closeOrderRequest } from '../../slices/ordersSlice';
 const App = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const backgroundLocation = location.state?.background;
-
+  const handleModalClose = () => {
+    navigate(-1);
+    dispatch(closeOrderRequest());
+  };
   useEffect(() => {
     dispatch(fetchIngredients());
     dispatch(getUserThunk());
@@ -104,7 +107,7 @@ const App = () => {
           <Route
             path='/feed/:number'
             element={
-              <Modal title={'Информация о заказе'} onClose={() => navigate(-1)}>
+              <Modal title={'Информация о заказе'} onClose={handleModalClose}>
                 <OrderInfo />
               </Modal>
             }
@@ -112,7 +115,7 @@ const App = () => {
           <Route
             path='/ingredients/:id'
             element={
-              <Modal title={'Детали ингредиента'} onClose={() => navigate(-1)}>
+              <Modal title={'Детали ингредиента'} onClose={handleModalClose}>
                 <IngredientDetails />
               </Modal>
             }
@@ -120,7 +123,7 @@ const App = () => {
           <Route
             path='/profile/orders/:number'
             element={
-              <Modal title={'Информация о заказе'} onClose={() => navigate(-1)}>
+              <Modal title={'Информация о заказе'} onClose={handleModalClose}>
                 <OrderInfo />
               </Modal>
             }
