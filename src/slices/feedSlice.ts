@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getFeedsApi } from '@api';
 import { TOrdersData } from '@utils-types';
-import { RootState } from '../services/store'; // Путь уточни под свой проект
+import { RootState } from '../services/store';
 
 export const fetchOrders = createAsyncThunk<TOrdersData>(
   'feed/fetchOrders',
