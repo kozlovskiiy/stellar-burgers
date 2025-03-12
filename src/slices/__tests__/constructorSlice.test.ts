@@ -21,15 +21,15 @@ describe('constructorSlice', () => {
     name: 'Булка',
     type: 'bun',
     price: 100,
-    proteins: 10, 
-    fat: 5,      
-    carbohydrates: 40, 
+    proteins: 10,
+    fat: 5,
+    carbohydrates: 40,
     calories: 200,
     image: 'bun-image.png',
     image_large: 'bun-image-large.png',
     image_mobile: 'bun-image-mobile.png'
   };
-  
+
   const mockIngredient: TConstructorIngredient = {
     id: 'uuid2',
     _id: '2',
@@ -57,7 +57,10 @@ describe('constructorSlice', () => {
   });
 
   it('добавляет ингредиент', () => {
-    const state = constructorReducer(initialState, addIngredient(mockIngredient));
+    const state = constructorReducer(
+      initialState,
+      addIngredient(mockIngredient)
+    );
     expect(state.constructorItems.ingredients).toHaveLength(1);
     expect(state.constructorItems.ingredients[0]).toEqual(
       expect.objectContaining({
@@ -71,7 +74,7 @@ describe('constructorSlice', () => {
         calories: mockIngredient.calories,
         image: mockIngredient.image,
         image_large: mockIngredient.image_large,
-        image_mobile: mockIngredient.image_mobile,
+        image_mobile: mockIngredient.image_mobile
       })
     );
   });
@@ -82,7 +85,10 @@ describe('constructorSlice', () => {
       constructorItems: { bun: null, ingredients: [mockIngredient] }
     };
 
-    const state = constructorReducer(stateWithIngredient, removeIngredient('uuid2'));
+    const state = constructorReducer(
+      stateWithIngredient,
+      removeIngredient('uuid2')
+    );
     expect(state.constructorItems.ingredients).toHaveLength(0);
   });
 
@@ -91,7 +97,10 @@ describe('constructorSlice', () => {
       ...initialState,
       constructorItems: {
         bun: null,
-        ingredients: [mockIngredient, { ...mockIngredient, id: 'uuid3', name: 'Сыр' }]
+        ingredients: [
+          mockIngredient,
+          { ...mockIngredient, id: 'uuid3', name: 'Сыр' }
+        ]
       }
     };
 
