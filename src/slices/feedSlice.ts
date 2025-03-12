@@ -12,7 +12,7 @@ type TFeedState = {
   orders: TOrdersData | null;
 };
 
-const initialState: TFeedState = {
+export const initialState: TFeedState = {
   orders: null
 };
 

@@ -9,7 +9,7 @@ interface OrderState {
   selectedOrder: TOrder | null;
 }
 
-const initialState: OrderState = {
+export const initialState: OrderState = {
   orderRequest: false,
   orderModalData: null,
   orders: [], // Инициализируем пустым массивом,
