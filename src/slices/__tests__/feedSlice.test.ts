@@ -49,9 +49,9 @@ describe('feedSlice', () => {
     const state = feedReducer(initialState, action);
     expect(state).toEqual({
       ...initialState,
-      orders: feedMock.orders,
-      total: feedMock.total,
-      totalToday: feedMock.totalToday,
+      orders: {
+        ...feedMock // Теперь `orders` содержит весь объект, а не только массив
+      },
       error: null,
       isLoading: false
     });
