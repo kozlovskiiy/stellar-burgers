@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.11% </span>
+                <span class="strong">97.77% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>73/90</span>
+                <span class='fraction'>88/90</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">40% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/5</span>
+                <span class='fraction'>2/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.11% </span>
+                <span class="strong">97.77% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>73/90</span>
+                <span class='fraction'>88/90</span>
             </div>
         
             
@@ -190,9 +190,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -202,36 +199,39 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -279,10 +279,10 @@ const orderSlice = createSlice({
   name: 'orders',
   initialState,
   reducers: {
-    closeOrderRequest<span class="fstat-no" title="function not covered" >(state) {</span>
-<span class="cstat-no" title="statement not covered" >      state.orderRequest = false;</span>
-<span class="cstat-no" title="statement not covered" >      state.orderModalData = null;</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    closeOrderRequest(state) {
+      state.orderRequest = false;
+      state.orderModalData = null;
+    }
   },
   selectors: {
     selectOrderRequest: <span class="fstat-no" title="function not covered" >(state) =&gt; state.</span>orderRequest,
@@ -292,34 +292,34 @@ const orderSlice = createSlice({
   extraReducers: (builder) =&gt; {
     builder
       .addCase(fetchNewOrder.pending, (state) =&gt; {
-<span class="cstat-no" title="statement not covered" >        state.orderRequest = true;</span>
+        state.orderRequest = true;
       })
       .addCase(fetchNewOrder.rejected, (state) =&gt; {
-<span class="cstat-no" title="statement not covered" >        state.orderRequest = false;</span>
+        state.orderRequest = false;
       })
       .addCase(fetchNewOrder.fulfilled, (state, action) =&gt; {
-<span class="cstat-no" title="statement not covered" >        state.orderModalData = action.payload.order;</span>
-<span class="cstat-no" title="statement not covered" >        state.orderRequest = false;</span>
+        state.orderModalData = action.payload.order;
+        state.orderRequest = false;
       })
       .addCase(fetchOrders.pending, (state) =&gt; {
-<span class="cstat-no" title="statement not covered" >        state.orderRequest = true;</span>
+        state.orderRequest = true;
       })
       .addCase(fetchOrders.rejected, (state) =&gt; {
-<span class="cstat-no" title="statement not covered" >        state.orderRequest = false;</span>
+        state.orderRequest = false;
       })
       .addCase(fetchOrders.fulfilled, (state, action) =&gt; {
-<span class="cstat-no" title="statement not covered" >        state.orders = action.payload; // Заполняем список заказов</span>
-<span class="cstat-no" title="statement not covered" >        state.orderRequest = false;</span>
+        state.orders = action.payload; // Заполняем список заказов
+        state.orderRequest = false;
       })
       .addCase(fetchOrderByNumber.pending, (state) =&gt; {
-<span class="cstat-no" title="statement not covered" >        state.orderRequest = true;</span>
+        state.orderRequest = true;
       })
       .addCase(fetchOrderByNumber.rejected, (state) =&gt; {
-<span class="cstat-no" title="statement not covered" >        state.orderRequest = false;</span>
+        state.orderRequest = false;
       })
       .addCase(fetchOrderByNumber.fulfilled, (state, action) =&gt; {
-<span class="cstat-no" title="statement not covered" >        state.selectedOrder = action.payload.orders[0];</span>
-<span class="cstat-no" title="statement not covered" >        state.orderRequest = false;</span>
+        state.selectedOrder = action.payload.orders[0];
+        state.orderRequest = false;
       });
   }
 });
@@ -340,7 +340,7 @@ export default orderSlice.reducer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-12T11:34:00.832Z
+                at 2025-03-12T13:16:01.625Z
             </div>
         <script src="../prettify.js"></script>
         <script>
