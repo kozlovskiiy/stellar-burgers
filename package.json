@@ -1,4 +1,5 @@
 {
+  "homepage": "https://github.com/kozlovskiiy/stellar-burgers",
   "name": "react-canonical",
   "version": "0.1.0",
   "private": true,
@@ -96,7 +97,9 @@
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier ./src --write",
     "test": "jest",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
